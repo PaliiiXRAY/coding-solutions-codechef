@@ -28,7 +28,7 @@ St_id	St_Name	Department	Course_id	Course_id	Course_Name	Credits	Prof_id
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-07-31T10:22:32.557Z  
+**Submitted:** 2026-07-31T10:22:54.204Z  
 
 ```sql
 /* Write a query to join the table 'student' and 'course' using 'Course_id' to match both the tables and output the joined table. */
