@@ -1,0 +1,31 @@
+// struct TreeNode {
+//     int val;
+//     TreeNode *left, *right;
+//     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+// };
+
+class Solution {
+public:
+    pair<int, int> floorAndCeil(TreeNode* root, int key) {
+        // write your code here 
+        int floor = -1;
+        int ceil = -1;
+        TreeNode *current = root;
+        while(current != nullptr){
+            if (current->val == key){
+                floor = key;
+                break;
+            }
+            else if(key > current->val){
+                floor = current ->val;
+                current = current->right;
+            }
+            else {
+                ceil = current -> val;
+                current = current -> left;
+            }
+            
+        }
+        return {floor , ceil};
+    }
+};
