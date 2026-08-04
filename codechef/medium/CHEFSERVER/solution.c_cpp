@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int getMinimumServers(int n, vector<pair<int, int>> serverConnections) {
+        // write your code here 
+        vector <list<int>> adj(n+1);
+        for (auto & x: serverConnections){
+            int u = x.first; int v = x.second;
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        vector <bool> visited(n+1, 0);
+        int ans = 0;
+        
+        queue<int> q;
+        q.push(1);
+        visited[1] = 1;
+        while(!q.empty()){
+            ans++;
+            int st = q.size();
+            for(int i = 0; i<st; i++){
+                int now = q.front();
+                if (now == n) return ans;
+                q.pop();
+                for(auto &x:adj[now]){
+                    if(visited[x] == 1) continue;
+                    visited[x] = 1;
+                    q.push(x);
+                }
+            }
+        }
+        return -1;
+    }
+};
