@@ -59,7 +59,7 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-04T09:40:54.002Z  
+**Submitted:** 2026-08-04T09:42:27.531Z  
 
 ```c_cpp
 // struct TreeNode {
