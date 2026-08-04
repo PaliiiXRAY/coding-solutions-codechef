@@ -59,14 +59,14 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-04T10:05:22.799Z  
+**Submitted:** 2026-08-04T10:24:24.650Z  
 
 ```c_cpp
 // struct TreeNode {
 //     int val;
 //     TreeNode *left, *right;
 //     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-// };
+// }; 
 
 class Solution {
 public:
