@@ -1,31 +1,33 @@
-// struct TreeNode {
-//     int val;
-//     TreeNode *left, *right;
-//     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-// };
-
 class Solution {
 public:
-    pair<int, int> floorAndCeil(TreeNode* root, int key) {
+    int getMinimumServers(int n, vector<pair<int, int>> serverConnections) {
         // write your code here 
-        int floor = -1;
-        int ceil = -1;
-        TreeNode *current = root;
-        while(current != nullptr){
-            if (current->val == key){
-                floor = key;
-                break;
-            }
-            else if(key > current->val){
-                floor = current ->val;
-                current = current->right;
-            }
-            else {
-                ceil = current -> val;
-                current = current -> left;
-            }
-            
+        vector <list<int>> adj(n+1);
+        for (auto & x: serverConnections){
+            int u = x.first; int v = x.second;
+            adj[u].push_back(v);
+            adj[v].push_back(u);
         }
-        return {floor , ceil};
+        vector <bool> visited(n+1, 0);
+        int ans = 0;
+        
+        queue<int> q;
+        q.push(1);
+        visited[1] = 1;
+        while(!q.empty()){
+            ans++;
+            int st = q.size();
+            for(int i = 0; i<st; i++){
+                int now = q.front();
+                if (now == n) return ans;
+                q.pop();
+                for(auto &x:adj[now]){
+                    if(visited[x] == 1) continue;
+                    visited[x] = 1;
+                    q.push(x);
+                }
+            }
+        }
+        return -1;
     }
 };
