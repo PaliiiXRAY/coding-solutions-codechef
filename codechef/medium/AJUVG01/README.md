@@ -4,45 +4,71 @@
 
 ## Problem
 
-You are given an Employees table. Write an SQL query to display the details of employees whose salary is greater than the average salary of all employees.
-
-Display the following columns:
-
-EmpID | Name | Department | Salary
-
-Sort the output Sort the result by Salary in descending order.
-
-## Input Table
-EmpID	Name	Department	Salary
-101	Alice	HR	50000
-102	Bob	IT	70000
-103	Charlie	Sales	60000
-104	David	IT	80000
-105	Eva	HR	45000
-106	Frank	Sales	90000
-## Output
-EmpID	Name	Department	Salary
-106	Frank	Sales	90000
-104	David	IT	80000
-102	Bob	IT	70000
-
-Average Salary = 65833.33
+_Description not available._
 
 ## Solution
 
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-18T17:43:04.052Z  
+**Submitted:** 2026-08-18T17:56:26.998Z  
 
 ```sql
--- your code goes here
-SELECT EmpID, Name,
-Department, Salary
+CREATE TABLE Customers (
+    CustomerID INTEGER PRIMARY KEY,
+    CustomerName TEXT
+);
 
-FROM Employees
-WHERE Salary > (SELECT AVG(SALARY) FROM Employees)
-ORDER BY Salary DESC;
+CREATE TABLE Orders (
+    OrderID INTEGER PRIMARY KEY,
+    CustomerID INTEGER,
+    OrderAmount INTEGER
+);
+
+CREATE TABLE Payments (
+    PaymentID INTEGER PRIMARY KEY,
+    OrderID INTEGER,
+    PaymentAmount INTEGER
+);
+
+INSERT INTO Customers VALUES
+(1,'Rahul'),
+(2,'Priya'),
+(3,'Amit'),
+(4,'Neha');
+
+INSERT INTO Orders VALUES
+(101,1,5000),
+(102,2,7000),
+(103,3,4000),
+(104,1,9000),
+(105,4,6000);
+
+INSERT INTO Payments VALUES
+(1,101,5000),
+(2,102,6500),
+(3,103,4000),
+(4,104,9500),
+(5,105,6000);
+
+SELECT c.CustomerID,
+     c.CustomerName, 
+     o.OrderID, 
+     o.OrderAmount, 
+     p.PaymentAmount
+FROM Customers AS c JOIN
+Orders AS o ON 
+c.CustomerID = o.CustomerID
+JOIN Payments AS p 
+ON p.OrderID = o.OrderID
+WHERE p.PaymentAmount >= o.OrderAmount
+AND EXISTS(
+ SELECT 1 FROM Orders o2
+ WHERE o2.CustomerID = c.CustomerID
+)
+ORDER BY  o.OrderAmount DESC;
+
+
 ```
 
 ---
