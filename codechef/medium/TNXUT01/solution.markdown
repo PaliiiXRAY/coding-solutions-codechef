@@ -50,4 +50,30 @@ What changes?
 - Gateway can handle authentication , routing, rate limiting and security
 - Mobile app does not need to know individual service addresses
 
-Why not each microservice daily??
+Why not each microservice daily?
+- Create tight coupling between mobile app and backend services
+- Servuce URLs/structure may change
+- More security exposrue
+- client must manage multiple endpoints
+- makes versoing and maintenance harder 
+- 
+
+4) Parts to show in draw.io HLD diagram
+
+we can show these boxes
+
+- Mobile APP
+- API GATEWAY
+- Load Balancer
+- User/Account service
+- Gear Catalog Service
+- Booking/Rental Service 
+- Payment Service
+- Notification Service
+- Message Queue
+- Database
+- SMS Provider
+- Monitoring/Logging
+
+Easy diagram flow to remember:
+ Mobile APP -> API GATEWAY
