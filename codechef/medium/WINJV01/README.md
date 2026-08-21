@@ -28,7 +28,7 @@ SnapLink is a URL shortener made for a marketing agency's campaigns. A junior de
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:39:45.871Z  
+**Submitted:** 2026-08-21T17:39:56.914Z  
 
 ```markdown
 1. Short Code Generation
@@ -49,6 +49,7 @@ Generation Method:
 Counter + Base62: A distributed counter (e.g., using an auto-incrementing database ID or a system like ZooKeeper) generates a unique base-10 number for every new link. This number is then mathematically converted into Base62.
 
 Why pick it: It guarantees 100% uniqueness without ever needing to check the database for collisions (unlike random generation), making it highly performant and scalable under heavy load.
+
 
 2. Fixing the REST Bugs
 Bug A (Missing URL payload):
