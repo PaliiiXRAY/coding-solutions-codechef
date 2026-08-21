@@ -27,7 +27,7 @@ TrekGear Rentals is a trekking-gear rental startup in Manali. Everything — log
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:50:42.546Z  
+**Submitted:** 2026-08-21T17:50:52.979Z  
 
 ```markdown
 Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
@@ -87,10 +87,10 @@ What changes?
 
 Why not each microservice daily?
 - Create tight coupling between mobile app and backend services
-- Servuce URLs/structure may change
+- Service URLs/structure may change
 - More security exposrue
-- client must manage multiple endpoints
-- makes versoing and maintenance harder 
+- Client must manage multiple endpoints
+- Makes versoing and maintenance harder 
 - 
 
 4) Parts to show in draw.io HLD diagram
