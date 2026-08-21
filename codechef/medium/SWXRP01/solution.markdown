@@ -30,8 +30,6 @@ The Limit: Very restrictive during a flash sale, such as 1 request per second pe
 
 Blocked Response: The API Gateway should return an HTTP status code 429 Too Many Requests, with a clear JSON payload message like {"error": "Rate limit exceeded. Please try again later."}.
 
-
-
 4. Incident 4: Delayed Auto-Scaling
 The Cause: The failure was caused by relying on reactive auto-scaling for an extreme, instantaneous traffic spike.
 
