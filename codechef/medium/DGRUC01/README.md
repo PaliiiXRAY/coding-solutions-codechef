@@ -31,7 +31,7 @@ PawCare, a veterinary clinic in Zirakpur, wants a booking app. The founder sent 
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:32:45.635Z  
+**Submitted:** 2026-08-21T17:32:51.627Z  
 
 ```markdown
 Q1. Classify each statement
@@ -60,6 +60,7 @@ Fast:
 
 Reliable:
 The booking system must maintain 99.9% availability per month, excluding planned maintenance.
+
 
 Q3. 99.9% Uptime
 
