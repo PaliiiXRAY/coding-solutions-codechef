@@ -80,4 +80,4 @@ Easy diagram flow to remember:
  
  &
  
- B
+ B  Message Queue Notification Service ->SMS Provider
