@@ -25,6 +25,7 @@ Fast:
 Reliable:
 The booking system must maintain 99.9% availability per month, excluding planned maintenance.
 
+
 Q3. 99.9% Uptime
 
 Per month:
