@@ -31,7 +31,7 @@ PawCare, a veterinary clinic in Zirakpur, wants a booking app. The founder sent 
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:28:56.269Z  
+**Submitted:** 2026-08-21T17:31:02.221Z  
 
 ```markdown
 Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
@@ -76,6 +76,9 @@ Suggested Microservice:-
 
 why this split?
 Services are separated acc to bussiness function , so no one failing / slow function does not bring down unrelated fucntions
+
+Load balancer scales the monolith, but it does not remove the internal coupling and shared resource bottlenecks causing the failure.
+
 
 Q)3 
 Currently:
