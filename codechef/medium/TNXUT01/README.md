@@ -27,7 +27,7 @@ TrekGear Rentals is a trekking-gear rental startup in Manali. Everything — log
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:20:39.447Z  
+**Submitted:** 2026-08-21T17:22:18.096Z  
 
 ```markdown
 Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
@@ -77,8 +77,12 @@ Q)3
 Currently:
 Mobile App -> API GATEWAY -> Microservices
 What changes?
-- Mobile app should cell one A[I Gateway URL.
-- ]
+- Mobile app should cell one API Gateway URL.
+- Gateway routes requests to the one correct microservice
+- Gateway can handle authentication , routing, rate limiting and security
+- Mobile app does not need to know individual service addresses
+
+Why not each microservice daily??
 
 ```
 
