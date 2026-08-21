@@ -55,10 +55,10 @@ What changes?
 
 Why not each microservice daily?
 - Create tight coupling between mobile app and backend services
-- Servuce URLs/structure may change
+- Service URLs/structure may change
 - More security exposrue
-- client must manage multiple endpoints
-- makes versoing and maintenance harder 
+- Client must manage multiple endpoints
+- Makes versoing and maintenance harder 
 - 
 
 4) Parts to show in draw.io HLD diagram
