@@ -27,7 +27,7 @@ TrekGear Rentals is a trekking-gear rental startup in Manali. Everything — log
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:26:58.094Z  
+**Submitted:** 2026-08-21T17:51:12.951Z  
 
 ```markdown
 Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
@@ -73,6 +73,9 @@ Suggested Microservice:-
 why this split?
 Services are separated acc to bussiness function , so no one failing / slow function does not bring down unrelated fucntions
 
+Load balancer scales the monolith, but it does not remove the internal coupling and shared resource bottlenecks causing the failure.
+
+
 Q)3 
 Currently:
 Mobile App -> API GATEWAY -> Microservices
@@ -84,15 +87,15 @@ What changes?
 
 Why not each microservice daily?
 - Create tight coupling between mobile app and backend services
-- Servuce URLs/structure may change
+- Service URLs/structure may change
 - More security exposrue
-- client must manage multiple endpoints
-- makes versoing and maintenance harder 
+- Client must manage multiple endpoints
+- Makes versoing and maintenance harder 
 - 
 
 4) Parts to show in draw.io HLD diagram
 
-we can show these boxes
+We can show these boxes
 
 - Mobile APP
 - API GATEWAY
@@ -112,7 +115,7 @@ Easy diagram flow to remember:
  
  &
  
- B  Message Queue
+ Booking service -> Message Queue ->Notification Service ->SMS Provider
 
 ```
 
