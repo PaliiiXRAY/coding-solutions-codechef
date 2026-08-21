@@ -27,7 +27,7 @@ TrekGear Rentals is a trekking-gear rental startup in Manali. Everything — log
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:26:55.270Z  
+**Submitted:** 2026-08-21T17:27:28.119Z  
 
 ```markdown
 Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
@@ -112,7 +112,7 @@ Easy diagram flow to remember:
  
  &
  
- B
+ B  Message Queue Notification Service ->SMS Provider
 
 ```
 
