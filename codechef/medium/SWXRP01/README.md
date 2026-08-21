@@ -27,7 +27,7 @@ FlashMart ran a 90-second flash sale. After it ended, the team found 4 separate 
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:45:11.099Z  
+**Submitted:** 2026-08-21T17:46:32.105Z  
 
 ```markdown
 1. Incident 1: Cart Data Loss
@@ -61,6 +61,8 @@ Limiting Key: Per-User ID (extracted from the authentication token). This is vas
 The Limit: Very restrictive during a flash sale, such as 1 request per second per user ID.
 
 Blocked Response: The API Gateway should return an HTTP status code 429 Too Many Requests, with a clear JSON payload message like {"error": "Rate limit exceeded. Please try again later."}.
+
+
 
 4. Incident 4: Delayed Auto-Scaling
 The Cause: The failure was caused by relying on reactive auto-scaling for an extreme, instantaneous traffic spike.
