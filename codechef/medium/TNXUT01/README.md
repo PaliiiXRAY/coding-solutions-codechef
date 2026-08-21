@@ -27,7 +27,7 @@ TrekGear Rentals is a trekking-gear rental startup in Manali. Everything — log
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:50:52.979Z  
+**Submitted:** 2026-08-21T17:51:32.552Z  
 
 ```markdown
 Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
@@ -63,14 +63,14 @@ Suggested Microservice:-
 
 -Gear Catalog Service - manages gear details and searching
 
-- Booking service - handles gear availability, reservations and returns
+- Booking/Rental service - handles gear availability, reservations and returns
 
 -Payment service: handles payment processing and status
 
 - Notification service - handles booking confirmations and notifications
 - User/Account service - handles login , profile and authentication
 
-why this split?
+Why this split?
 Services are separated acc to bussiness function , so no one failing / slow function does not bring down unrelated fucntions
 
 Load balancer scales the monolith, but it does not remove the internal coupling and shared resource bottlenecks causing the failure.
@@ -95,7 +95,7 @@ Why not each microservice daily?
 
 4) Parts to show in draw.io HLD diagram
 
-we can show these boxes
+We can show these boxes
 
 - Mobile APP
 - API GATEWAY
