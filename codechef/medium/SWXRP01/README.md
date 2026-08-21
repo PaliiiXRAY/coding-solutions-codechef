@@ -27,7 +27,7 @@ FlashMart ran a 90-second flash sale. After it ended, the team found 4 separate 
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:40:07.906Z  
+**Submitted:** 2026-08-21T17:40:10.153Z  
 
 ```markdown
 1. Short Code Generation
@@ -95,8 +95,6 @@ click_count (Integer, default 0)
 expires_at (Timestamp / TTL Index)
 
 created_at (Timestamp)
-
-
 
 4. Cache-Aside Setup
 What gets cached: The direct mapping of the short_code (as the cache key) to the long_url (as the cache value).
