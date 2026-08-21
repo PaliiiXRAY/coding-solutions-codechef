@@ -27,7 +27,7 @@ TrekGear Rentals is a trekking-gear rental startup in Manali. Everything — log
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:54:27.455Z  
+**Submitted:** 2026-08-21T17:54:33.019Z  
 
 ```markdown
 1. HLD vs. LLD Classification
@@ -58,7 +58,7 @@ Suggested Microservices (grouped by business function):
 
 -Payment Service: Processes financial transactions and tracks payment statuses.
 
-Notification Service: Handles the generation and dispatch of SMS and email confirmations.
+-Notification Service: Handles the generation and dispatch of SMS and email confirmations.
 
 Why this split:
 This architecture provides fault isolation. By separating services by business domain, a failure or slowdown in the Notification Service (due to SMS provider delays) will only affect notifications. The Catalog Service remains completely unblocked and independent, allowing users to continue browsing gear without encountering a blank page.
