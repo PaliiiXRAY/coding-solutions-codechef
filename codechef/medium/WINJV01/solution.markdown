@@ -17,6 +17,7 @@ Counter + Base62: A distributed counter (e.g., using an auto-incrementing databa
 
 Why pick it: It guarantees 100% uniqueness without ever needing to check the database for collisions (unlike random generation), making it highly performant and scalable under heavy load.
 
+
 2. Fixing the REST Bugs
 Bug A (Missing URL payload):
 
