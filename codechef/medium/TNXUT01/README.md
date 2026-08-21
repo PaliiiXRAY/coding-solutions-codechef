@@ -27,99 +27,96 @@ TrekGear Rentals is a trekking-gear rental startup in Manali. Everything — log
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:50:32.978Z  
+**Submitted:** 2026-08-21T17:51:52.549Z  
 
 ```markdown
-1. Requirement Classification
-"Pet owners should be able to book an appointment with a vet"
+Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
 
-Classification: FR (Functional Requirement)
+b) LLD - Choosing a  database  column to index is an implementation-level database decision
 
-Reason: It defines a specific action and behavior the system must perform.
+c) HLD - Choosing direct communication or a queue defines how servuces communicate. 
 
-"The app should be fast"
+d) LLD- RESR endpoint naming is a detailed API implementation decision.
 
-Classification: NFR (Non-Functional Requirement)
+r) HLD- Placing  a load balancer affects the overall system/deployment architecture.
 
-Reason: It describes a performance quality attribute of the system, not a specific feature.
-
-"Vets should be able to see their day's schedule"
-
-Classification: FR (Functional Requirement)
-
-Reason: It describes a specific user capability and data retrieval function.
-
-"The app should look modern and premium"
-
-Classification: Not a Requirement
-
-Reason: This is a subjective opinion that cannot be objectively quantified, built, or tested as written.
-
-"Owners should get a reminder notification 1 hour before their appointment"
-
-Classification: FR (Functional Requirement)
-
-Reason: It defines a specific automated action and business logic the system must execute.
-
-"The system should be reliable"
-
-Classification: NFR (Non-Functional Requirement)
-
-Reason: It specifies a system-wide quality attribute (availability/robustness) rather than a direct function.
-
-"Appointments can only be booked up to 2 weeks in advance"
-
-Classification: FR (Functional Requirement)
-
-Reason: It acts as a specific business rule or constraint applied to the booking functionality.
-
-"The app should support both Hindi and English"
-
-Classification: NFR (Non-Functional Requirement)
-
-Reason: It defines a system-wide architectural standard (localization) rather than a single user action.
+f) LLD- Retry logic inside the SMS function is an internnal code - level detail.
 
 
-2. Rewriting NFRs to be Measurable
-Rewriting Statement 2 ("fast"):
+Q)2 
 
-"95% of screen load times must complete in under [500] [milliseconds] [during standard operational hours]."
+Why load balancing fails:
 
-Rewriting Statement 6 ("reliable"):
+-TrekGear is still one monolithic application.
 
-"The booking service must successfully process [99.9] [% of all requests] [without returning a server error under normal load]."
-(Alternatively for uptime: "The system must maintain [99.9] [% uptime] [over any rolling 30-day period].")
+-Booking, Payment, and SMS notification code are tightly coupled
+
+-If SMS becomes slow, it blocks the same application resources
+
+-Load balancer only distributes requests; it doesn't remove the bottleneck
+
+- All users, even catalog users, can be affected by the slow SMS servuce.
+
+-Scaling the whole application is also wasteful and expensive
+
+#Suggested Microservice:-
+
+-Gear Catalog Service - manages gear details and searching
+
+- Booking/Rental service - handles gear availability, reservations and returns
+
+-Payment service: handles payment processing and status
+
+- Notification service - handles booking confirmations and notifications
+- User/Account service - handles login , profile and authentication
+
+Why this split?
+Services are separated acc to bussiness function , so no one failing / slow function does not bring down unrelated fucntions
+
+Load balancer scales the monolith, but it does not remove the internal coupling and shared resource bottlenecks causing the failure.
 
 
-3. Uptime and Downtime Calculation
-Maximum downtime per month (30 days):
+Q)3 
+Currently:
+Mobile App -> API GATEWAY -> Microservices
+What changes?
+- Mobile app should cell one API Gateway URL.
+- Gateway routes requests to the one correct microservice
+- Gateway can handle authentication , routing, rate limiting and security
+- Mobile app does not need to know individual service addresses
 
-Total minutes in a 30-day month = 30 days × 24 hours × 60 minutes = 43,200 minutes.
+Why not each microservice daily?
+- Create tight coupling between mobile app and backend services
+- Service URLs/structure may change
+- More security exposrue
+- Client must manage multiple endpoints
+- Makes versoing and maintenance harder 
+- 
 
-Downtime allowance = 100% - 99.9% = 0.1%.
+4) Parts to show in draw.io HLD diagram
 
-0.1% of 43,200 minutes = 43.2 minutes per month.
+We can show these boxes
 
-Maximum downtime per year (365 days):
+- Mobile APP
+- API GATEWAY
+- Load Balancer
+- User/Account service
+- Gear Catalog Service
+- Booking/Rental Service 
+- Payment Service
+- Notification Service
+- Message Queue
+- Database
+- SMS Provider
+- Monitoring/Logging
 
-Total minutes in a year = 365 days × 24 hours × 60 minutes = 525,600 minutes.
+Easy diagram flow to remember:
+ Mobile APP -> API GATEWAY -> Servies ->Databases
+ 
+ &
+ 
+ Booking service -> Message Queue ->Notification Service ->SMS Provider
 
-0.1% of 525,600 minutes = 525.6 minutes per year (approx. 8.76 hours).
-
-What this means in practice:
-
-The clinic's IT team has a strict limit of roughly 43 minutes total each month to handle all server crashes, bug fixes, and scheduled maintenance; if the system is down longer than that, they have failed their reliability agreement.
-
-
-
-4. Design-Changing Questions for the Founder
-Concurrency Handling: "How should the system behave if two pet owners try to select and book the exact same vet for the exact same time slot simultaneously?"
-
-System Integration: "Will this app need to automatically sync appointments and patient data with your existing clinic management/billing software, or will it function as a completely standalone database?"
-
-Future Scaling: "Do you plan to open additional clinic locations in the future, meaning the database architecture needs to be designed from the start to support multiple branches and cross-branch scheduling?"
-
-No-Show Policy Logic: "What is the specific policy for cancellations and no-shows, and does the system need to automatically block or flag users who repeatedly miss appointments?"
 ```
 
 ---
