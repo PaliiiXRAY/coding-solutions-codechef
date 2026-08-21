@@ -27,7 +27,7 @@ TrekGear Rentals is a trekking-gear rental startup in Manali. Everything — log
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:51:32.552Z  
+**Submitted:** 2026-08-21T17:52:02.968Z  
 
 ```markdown
 Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
@@ -45,7 +45,7 @@ f) LLD- Retry logic inside the SMS function is an internnal code - level detail.
 
 Q)2 
 
-why load balancing fails:
+Why load balancing fails:
 
 -TrekGear is still one monolithic application.
 
@@ -59,7 +59,7 @@ why load balancing fails:
 
 -Scaling the whole application is also wasteful and expensive
 
-Suggested Microservice:-
+#Suggested Microservice:-
 
 -Gear Catalog Service - manages gear details and searching
 
