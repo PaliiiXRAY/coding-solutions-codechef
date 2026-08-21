@@ -45,8 +45,5 @@ Q)3
 Currently:
 Mobile App -> API GATEWAY -> Microservices
 What changes?
-- Mobile app should cell one API Gateway URL.
-- Gateway routes requests to the one correct microservice
-- Gateway can handle authentication , routing, rate limiting and security
-- Mobile app does not need to know individual service addresses
-- Why not each microservice daily??
+- Mobile app should cell one A[I Gateway URL.
+- ]
