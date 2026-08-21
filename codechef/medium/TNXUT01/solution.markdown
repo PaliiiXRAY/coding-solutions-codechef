@@ -13,7 +13,7 @@ f) LLD- Retry logic inside the SMS function is an internnal code - level detail.
 
 Q)2 
 
-why load balancing fails:
+Why load balancing fails:
 
 -TrekGear is still one monolithic application.
 
@@ -27,7 +27,7 @@ why load balancing fails:
 
 -Scaling the whole application is also wasteful and expensive
 
-Suggested Microservice:-
+#Suggested Microservice:-
 
 -Gear Catalog Service - manages gear details and searching
 
