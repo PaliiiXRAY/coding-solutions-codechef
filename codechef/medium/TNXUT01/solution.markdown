@@ -76,5 +76,8 @@ we can show these boxes
 - Monitoring/Logging
 
 Easy diagram flow to remember:
- Mobile APP
-- API GATEWAY
+ Mobile APP -> API GATEWAY -> Servies ->Databases
+ 
+ &
+ 
+ B
