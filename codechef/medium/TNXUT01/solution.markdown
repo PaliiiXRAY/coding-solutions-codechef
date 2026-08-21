@@ -4,7 +4,17 @@ b) LLD - Choosing a  database  column to index is an implementation-level databa
 
 c) HLD - Choosing direct communication or a queue defines how servuces communicate. 
 
-d) LLD- RESR endpoint naming is a detailed API implementation decision
+d) LLD- RESR endpoint naming is a detailed API implementation decision.
+
 r) HLD- Placing  a load balancer affects the overall system/deployment architecture.
 
 f) LLD- Retry logic inside the SMS function is an internnal code - level detail.
+
+
+Q)2 
+
+why load balancing fails:
+
+-TrekGear is still one monolithic application.
+
+-
