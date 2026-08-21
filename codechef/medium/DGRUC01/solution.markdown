@@ -1,50 +1,83 @@
-Q1. Classify each statement
+Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
 
-1. FR (Functional Requirement) – The system must allow pet owners to book appointments with a veterinarian.
+b) LLD - Choosing a  database  column to index is an implementation-level database decision
 
-2. NFR (Non-Functional Requirement) – “Fast” describes the performance of the system rather than a specific function.
+c) HLD - Choosing direct communication or a queue defines how servuces communicate. 
 
-3. FR (Functional Requirement) – The system must allow vets to view their daily appointment schedule.
+d) LLD- RESR endpoint naming is a detailed API implementation decision.
 
-4. Not a Requirement – “Modern and premium” is subjective and cannot be clearly measured or tested as written.
+r) HLD- Placing  a load balancer affects the overall system/deployment architecture.
 
-5. FR (Functional Requirement) – The system must send owners a reminder notification one hour before their appointment.
-
-6. NFR (Non-Functional Requirement) – “Reliable” describes the availability/reliability quality of the system.
-
-7. FR (Functional Requirement) – The system must restrict appointment booking to a maximum of two weeks in advance.
-
-8. FR (Functional Requirement) – The system must support both Hindi and English languages.
+f) LLD- Retry logic inside the SMS function is an internnal code - level detail.
 
 
-Q2. Make the NFRs measurable
+Q)2 
 
-Fast:
-95% of appointment-search requests must be completed within 300 ms under normal system load.
+why load balancing fails:
 
-Reliable:
-The booking system must maintain 99.9% availability per month, excluding planned maintenance.
+-TrekGear is still one monolithic application.
 
+-Booking, Payment, and SMS notification code are tightly coupled
 
-Q3. 99.9% Uptime
+-If SMS becomes slow, it blocks the same application resources
 
-Per month:
-30 × 24 × 60 = 43,200 minutes
-0.1% downtime = 43.2 minutes/month
+-Load balancer only distributes requests; it doesn't remove the bottleneck
 
-Per year:
-365 × 24 × 60 = 525,600 minutes
-0.1% downtime = 525.6 minutes = 8.76 hours/year
+- All users, even catalog users, can be affected by the slow SMS servuce.
 
-In practice: The booking system can be unavailable for a maximum of about 43.2 minutes in a 30-day month while still meeting the 99.9% uptime requirement.
+-Scaling the whole application is also wasteful and expensive
 
+Suggested Microservice:-
 
-Q4. Four questions for the founder
-Can two users try to book the same vet and time slot simultaneously?
-→ This affects concurrency and booking-locking design.
-What are the cancellation and rescheduling rules?
-→ This affects the booking workflow and database design.
-Will PawCare have one clinic branch or multiple branches?
-→ This affects how appointments, vets and locations are managed.
-What are the busiest days and hours for appointments?
-→ This affects performance, scaling and resource planning.
+-Gear Catalog Service - manages gear details and searching
+
+- Booking service - handles gear availability, reservations and returns
+
+-Payment service: handles payment processing and status
+
+- Notification service - handles booking confirmations and notifications
+- User/Account service - handles login , profile and authentication
+
+why this split?
+Services are separated acc to bussiness function , so no one failing / slow function does not bring down unrelated fucntions
+
+Q)3 
+Currently:
+Mobile App -> API GATEWAY -> Microservices
+What changes?
+- Mobile app should cell one API Gateway URL.
+- Gateway routes requests to the one correct microservice
+- Gateway can handle authentication , routing, rate limiting and security
+- Mobile app does not need to know individual service addresses
+
+Why not each microservice daily?
+- Create tight coupling between mobile app and backend services
+- Servuce URLs/structure may change
+- More security exposrue
+- client must manage multiple endpoints
+- makes versoing and maintenance harder 
+- 
+
+4) Parts to show in draw.io HLD diagram
+
+we can show these boxes
+
+- Mobile APP
+- API GATEWAY
+- Load Balancer
+- User/Account service
+- Gear Catalog Service
+- Booking/Rental Service 
+- Payment Service
+- Notification Service
+- Message Queue
+- Database
+- SMS Provider
+- Monitoring/Logging
+
+Easy diagram flow to remember:
+ Mobile APP -> API GATEWAY -> Servies ->Databases
+ 
+ &
+ 
+ Booking service -> Message Queue ->Notification Service ->SMS Provider
