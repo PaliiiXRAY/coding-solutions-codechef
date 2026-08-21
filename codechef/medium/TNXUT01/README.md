@@ -27,96 +27,69 @@ TrekGear Rentals is a trekking-gear rental startup in Manali. Everything — log
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:51:52.549Z  
+**Submitted:** 2026-08-21T17:54:37.495Z  
 
 ```markdown
-Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
+1. HLD vs. LLD Classification
+a) HLD - Splitting the app into Booking and Notification services dictates the overall system architecture and macro-level component structure.
 
-b) LLD - Choosing a  database  column to index is an implementation-level database decision
+b) LLD - Choosing a database column to index is an implementation-specific detail of the database schema.
 
-c) HLD - Choosing direct communication or a queue defines how servuces communicate. 
+c) HLD - Deciding between direct communication or a message queue defines the architectural communication pattern between major systems.
 
-d) LLD- RESR endpoint naming is a detailed API implementation decision.
+d) LLD - REST API endpoint naming is a detailed coding standard and implementation-level detail.
 
-r) HLD- Placing  a load balancer affects the overall system/deployment architecture.
+e) HLD - Placing a load balancer dictates the system's infrastructure, scaling strategy, and deployment architecture.
 
-f) LLD- Retry logic inside the SMS function is an internnal code - level detail.
-
-
-Q)2 
-
-Why load balancing fails:
-
--TrekGear is still one monolithic application.
-
--Booking, Payment, and SMS notification code are tightly coupled
-
--If SMS becomes slow, it blocks the same application resources
-
--Load balancer only distributes requests; it doesn't remove the bottleneck
-
-- All users, even catalog users, can be affected by the slow SMS servuce.
-
--Scaling the whole application is also wasteful and expensive
-
-#Suggested Microservice:-
-
--Gear Catalog Service - manages gear details and searching
-
-- Booking/Rental service - handles gear availability, reservations and returns
-
--Payment service: handles payment processing and status
-
-- Notification service - handles booking confirmations and notifications
-- User/Account service - handles login , profile and authentication
-
-Why this split?
-Services are separated acc to bussiness function , so no one failing / slow function does not bring down unrelated fucntions
-
-Load balancer scales the monolith, but it does not remove the internal coupling and shared resource bottlenecks causing the failure.
+f) LLD - Retry logic is an internal, code-level algorithmic detail within a specific function.
 
 
-Q)3 
-Currently:
-Mobile App -> API GATEWAY -> Microservices
-What changes?
-- Mobile app should cell one API Gateway URL.
-- Gateway routes requests to the one correct microservice
-- Gateway can handle authentication , routing, rate limiting and security
-- Mobile app does not need to know individual service addresses
+2. Monolith Failure and Microservices Split
+Why "just adding more servers" fails:
 
-Why not each microservice daily?
-- Create tight coupling between mobile app and backend services
-- Service URLs/structure may change
-- More security exposrue
-- Client must manage multiple endpoints
-- Makes versoing and maintenance harder 
-- 
+Because TrekGear is a tightly coupled monolith, a slow process (like the SMS service) consumes shared application resources (such as thread pools or memory) across the entire application. Adding more servers behind a load balancer simply replicates the same monolithic code onto new machines. The slow SMS requests will quickly exhaust the resources on the new servers as well, causing them to crash just like the original server. Load balancing distributes traffic but fails to isolate the underlying bottleneck.
 
-4) Parts to show in draw.io HLD diagram
+Suggested Microservices (grouped by business function):
 
-We can show these boxes
+-User Service: Handles registration, login, authentication, and user profiles.
 
-- Mobile APP
-- API GATEWAY
-- Load Balancer
-- User/Account service
-- Gear Catalog Service
-- Booking/Rental Service 
-- Payment Service
-- Notification Service
-- Message Queue
-- Database
-- SMS Provider
-- Monitoring/Logging
+-Catalog Service: Manages trekking gear inventory, item details, and search functionality.
 
-Easy diagram flow to remember:
- Mobile APP -> API GATEWAY -> Servies ->Databases
- 
- &
- 
- Booking service -> Message Queue ->Notification Service ->SMS Provider
+-Booking Service: Manages scheduling, gear availability, and reservations.
 
+-Payment Service: Processes financial transactions and tracks payment statuses.
+
+-Notification Service: Handles the generation and dispatch of SMS and email confirmations.
+
+Why this split:
+This architecture provides fault isolation. By separating services by business domain, a failure or slowdown in the Notification Service (due to SMS provider delays) will only affect notifications. The Catalog Service remains completely unblocked and independent, allowing users to continue browsing gear without encountering a blank page.
+
+3. Client-Server Architecture Changes
+What needs to change:
+The architecture must introduce an API Gateway. The mobile app should point to this single API Gateway URL. The Gateway will intercept all incoming client requests, handle cross-cutting concerns (like authentication and rate limiting), and securely route the request to the appropriate backend microservice.
+
+Why the app should NOT call microservices directly:
+
+Tight Coupling: The mobile client would need to hardcode and manage the exact IP addresses/URLs of every individual service, which breaks easily if backend infrastructure changes.
+
+Security Exposure: It exposes the entire internal network structure and individual service endpoints directly to the public internet.
+
+Network Inefficiency (Chattiness): A single user action on the mobile app might require fetching data from three different services, forcing the client to make three separate high-latency round trips over the internet instead of one call to a Gateway that aggregates the data internally.
+
+4. Parts of the HLD Diagram
+Mobile App: The client-facing interface where users browse and book gear.
+
+API Gateway: The single secure entry point that receives client requests, handles authentication, and routes traffic.
+
+Load Balancer: Distributes incoming API Gateway traffic evenly across multiple instances of a specific microservice.
+
+Microservices (User, Catalog, Booking, Payment, Notification): The independent backend applications responsible for executing isolated business logic.
+
+Databases: Independent data storage systems dedicated to each specific microservice (ensuring strict data isolation).
+
+Message Queue (e.g., Kafka/RabbitMQ): An asynchronous communication broker placed between the Booking and Notification services to prevent slow SMS operations from blocking the checkout process.
+
+External SMS Provider: The third-party API (like Twilio) utilized by the Notification Service to dispatch actual text messages.
 ```
 
 ---
