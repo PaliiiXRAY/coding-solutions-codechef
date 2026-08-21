@@ -31,14 +31,14 @@ Suggested Microservice:-
 
 -Gear Catalog Service - manages gear details and searching
 
-- Booking service - handles gear availability, reservations and returns
+- Booking/Rental service - handles gear availability, reservations and returns
 
 -Payment service: handles payment processing and status
 
 - Notification service - handles booking confirmations and notifications
 - User/Account service - handles login , profile and authentication
 
-why this split?
+Why this split?
 Services are separated acc to bussiness function , so no one failing / slow function does not bring down unrelated fucntions
 
 Load balancer scales the monolith, but it does not remove the internal coupling and shared resource bottlenecks causing the failure.
@@ -63,7 +63,7 @@ Why not each microservice daily?
 
 4) Parts to show in draw.io HLD diagram
 
-we can show these boxes
+We can show these boxes
 
 - Mobile APP
 - API GATEWAY
