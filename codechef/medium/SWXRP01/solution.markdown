@@ -64,8 +64,6 @@ expires_at (Timestamp / TTL Index)
 
 created_at (Timestamp)
 
-
-
 4. Cache-Aside Setup
 What gets cached: The direct mapping of the short_code (as the cache key) to the long_url (as the cache value).
 
