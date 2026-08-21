@@ -18,13 +18,13 @@ Because TrekGear is a tightly coupled monolith, a slow process (like the SMS ser
 
 Suggested Microservices (grouped by business function):
 
-User Service: Handles registration, login, authentication, and user profiles.
+-User Service: Handles registration, login, authentication, and user profiles.
 
-Catalog Service: Manages trekking gear inventory, item details, and search functionality.
+-Catalog Service: Manages trekking gear inventory, item details, and search functionality.
 
-Booking Service: Manages scheduling, gear availability, and reservations.
+-Booking Service: Manages scheduling, gear availability, and reservations.
 
-Payment Service: Processes financial transactions and tracks payment statuses.
+-Payment Service: Processes financial transactions and tracks payment statuses.
 
 Notification Service: Handles the generation and dispatch of SMS and email confirmations.
 
