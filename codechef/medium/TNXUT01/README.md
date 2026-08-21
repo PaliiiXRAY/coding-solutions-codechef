@@ -27,7 +27,7 @@ TrekGear Rentals is a trekking-gear rental startup in Manali. Everything — log
 **Language:** markdown  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-08-21T17:12:22.272Z  
+**Submitted:** 2026-08-21T17:12:35.270Z  
 
 ```markdown
 Q1) a) HLD-  Splitting the app into Booking and Notification services is a high-level arcjitectural decision
@@ -41,6 +41,8 @@ d) LLD- RESR endpoint naming is a detailed API implementation decision.
 r) HLD- Placing  a load balancer affects the overall system/deployment architecture.
 
 f) LLD- Retry logic inside the SMS function is an internnal code - level detail.
+
+
 ```
 
 ---
