@@ -41,6 +41,9 @@ Suggested Microservice:-
 why this split?
 Services are separated acc to bussiness function , so no one failing / slow function does not bring down unrelated fucntions
 
+Load balancer scales the monolith, but it does not remove the internal coupling and shared resource bottlenecks causing the failure.
+
+
 Q)3 
 Currently:
 Mobile App -> API GATEWAY -> Microservices
