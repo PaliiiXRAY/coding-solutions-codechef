@@ -76,8 +76,4 @@ we can show these boxes
 - Monitoring/Logging
 
 Easy diagram flow to remember:
- Mobile APP -> API GATEWAY -> Servies ->Databases
- 
- &
- 
- B  Message Queue Notification Service ->SMS Provider
+ Mobile APP -> API GATEWAY
